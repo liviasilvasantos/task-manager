@@ -14,35 +14,9 @@ config:
       bypassProxy: ''
 items:
   - info:
-      name: Tasks
-      type: http
-      seq: 1
-    http:
-      method: GET
-      url: http://localhost:8080/tasks
-      auth: inherit
-    settings:
-      encodeUrl: true
-      timeout: 0
-      followRedirects: true
-      maxRedirects: 5
-  - info:
       name: New Task
       type: http
       seq: 2
-    http:
-      method: POST
-      url: http://localhost:8080/tasks
-      auth: inherit
-    settings:
-      encodeUrl: true
-      timeout: 0
-      followRedirects: true
-      maxRedirects: 5
-  - info:
-      name: Update task
-      type: http
-      seq: 3
     http:
       method: POST
       url: http://localhost:8080/tasks
@@ -58,11 +32,44 @@ items:
       timeout: 0
       followRedirects: true
       maxRedirects: 5
+  - info:
+      name: Tasks
+      type: http
+      seq: 1
+    http:
+      method: GET
+      url: http://localhost:8080/tasks
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Update task
+      type: http
+      seq: 3
+    http:
+      method: PUT
+      url: http://localhost:8080/tasks/e693b0a8-a7d6-4149-91ce-0f0ae5c42666
+      body:
+        type: json
+        data: |-
+          {
+            "title": "ligar para dentista",
+            "description": "ligar para a dentista e confirmar a próxima consulta de quinta-feira, 09/07"
+          }
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
 bundled: true
 extensions:
   bruno:
     ignore:
       - node_modules
       - .git
-    exportedAt: '2026-07-05T23:56:01.604Z'
+    exportedAt: '2026-07-06T00:26:39.665Z'
     exportedUsing: Bruno
