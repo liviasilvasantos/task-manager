@@ -87,9 +87,11 @@
 
 ### Project Constraints
 
-- The solution MUST remain small and simple.
-- The implementation MUST use Java 21 with a Spring Boot version compatible with Java 21.
-- Automated tests are not required by default for this project.
+- A solução DEVE permanecer pequena e simples.
+
+- A implementação DEVE usar Java 21 com uma versão do Spring Boot compatível com Java 21.
+
+- Testes automatizados SÃO OBRIGATÓRIOS: cada funcionalidade DEVE ter suíte de testes que alcance 100% de cobertura e não pode ser finalizada sem lint e testes 100% passarem.
 
 ### Functional Requirements
 

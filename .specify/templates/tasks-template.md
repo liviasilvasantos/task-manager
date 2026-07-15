@@ -9,7 +9,7 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: Automated test tasks are not part of this project by default. Only include them if the feature specification explicitly requires them for a high-risk change.
+**Tests**: Testes automatizados são obrigatórios para TODAS as funcionalidades. Cada tarefa relacionada à implementação DEVE incluir subtarefas para criar testes que alcancem 100% de cobertura da funcionalidade. Nenhuma tarefa pode ser marcada como concluída até que lint e todos os testes passem com 100%.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 

@@ -24,7 +24,7 @@
 
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 
-**Testing**: [e.g., none; manual verification only]
+**Testing**: [Automated tests OBRIGATÓRIOS; cada funcionalidade DEVE incluir testes automatizados e visar cobertura de 100% para o escopo da funcionalidade]
 
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 
@@ -32,7 +32,7 @@
 
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
 
-**Constraints**: [domain-specific, e.g., small/simple scope, Java 21, Spring Boot compatible version, no automated tests, minimal dependencies]
+**Constraints**: [domain-specific, e.g., small/simple scope, Java 21, Spring Boot compatible version, arquitetura hexagonal obrigatória, testes automatizados com 100% de cobertura, minimal dependencies]
 
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 

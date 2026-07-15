@@ -1,40 +1,65 @@
 <!--
 Sync Impact Report
-- Version change: 0.0.0 -> 1.0.0
-- Modified principles: none -> Simplicity First, Clean Code by Default, Pragmatic Spring Boot Usage, Lean Validation
-- Added sections: Project Constraints, Development Workflow
-- Removed sections: none
+- Version change: 1.0.0 -> 1.1.0
+- Modified principles:
+  - "Lean Validation" (removido) -> "Cobertura de Testes Obrigatória"
+  - "Pragmatic Spring Boot Usage" -> adaptado para "Adoção de Java 21 e Spring Boot compatível" (linguagem formalizada)
+  - Novos princípios adicionados: Arquitetura Hexagonal, Cobertura de Testes 100%, Evitar Comentários, Gate de Finalização (lint + testes 100%), Proibição de Gambiarras
+- Added sections: Regras de Qualidade e Entrega, Arquitetura
+- Removed sections: "Lean Validation" (reformulado)
 - Templates requiring updates: ✅ .specify/templates/plan-template.md, ✅ .specify/templates/spec-template.md, ✅ .specify/templates/tasks-template.md
 - Follow-up TODOs: none
 -->
 
-# Todo Constitution
+# Constituição do Todo
 
-## Core Principles
+## Princípios Centrais
 
-### I. Simplicity First
-This project MUST stay small, focused, and easy to reason about. New features MUST solve the immediate need without introducing unnecessary abstractions, speculative layers, or framework churn. When trade-offs exist, the simplest option that satisfies the current requirement MUST be chosen.
+### I. Simplicidade em Primeiro Lugar
+O projeto DEVE permanecer pequeno, focado e fácil de compreender. Novas funcionalidades DEVEM resolver a necessidade imediata sem introduzir abstrações desnecessárias ou complexidade especulativa. Quando existirem trade‑offs, a opção mais simples que satisfaça o requisito DEVE ser escolhida.
 
-### II. Clean Code by Default
-Code MUST be easy to read and maintain. Names MUST be explicit, classes and methods MUST have a single responsibility, and complexity MUST be reduced through small functions, clear structure, and consistent formatting. Duplication MUST be avoided when it would make the system harder to change.
+### II. Código Limpo por Padrão
+O código DEVE ser fácil de ler e manter. Nomes DEVEM ser explícitos, classes e funções DEVEM ter responsabilidade única, e a complexidade DEVEM ser reduzida por funções pequenas, estrutura clara e formatação consistente. Evitar duplicação quando ela prejudicar a manutenibilidade.
 
-### III. Pragmatic Spring Boot Usage
-The application MUST use a Java 21-compatible Spring Boot version and follow standard Spring conventions without over-engineering. Configuration, dependency injection, and package structure MUST remain straightforward and aligned with the small scope of the project.
+### III. Adoção de Java 21 e Spring Boot Compatível
+A base do projeto DEVE usar Java 21 e uma versão do Spring Boot compatível. Configuração, injeção de dependências e estrutura de pacotes DEVEM seguir convenções claras e não superdimensionar a solução para o escopo do projeto.
 
-### IV. Lean Validation
-This project MUST NOT introduce automated test suites by default. Validation MUST rely on straightforward manual checks, local execution, and simple verification steps appropriate for a small application. Automated tests MAY be added only if a change introduces meaningful risk and the team explicitly decides they are necessary.
+### IV. Arquitetura Hexagonal (Obrigatória)
+O código DEVE seguir a arquitetura hexagonal (ports & adapters). Dependências externas e detalhes de infraestrutura DEVEM ser isolados nos adaptadores; o domínio e as regras de negócio DEVEM ser independentes de frameworks e infra.
+
+### V. Cobertura de Testes 100% por Funcionalidade
+Toda funcionalidade NOVA ou alterada DEVE ter testes automatizados cobrindo 100% das linhas/ramificações relevantes do código dessa funcionalidade. A cobertura é um requisito de aceitação — sem 100% de cobertura não há conclusão da tarefa.
+
+### VI. Evitar Comentários; Priorizar Código Legível
+Comentários DEVEM ser evitados. Prefira código simples, nomeclatura clara e extração de funções para tornar o propósito explícito. Comentários só são aceitáveis quando explicam decisões de projeto não óbvias e não podem ser expressas por código mais claro.
+
+### VII. Gate de Finalização Estrito
+Uma tarefa SÓ PODE SER considerada finalizada se os comandos de lint e de testes retornarem 100% de sucesso. Não há exceções: se qualquer um desses comandos falhar, a tarefa NÃO está completa.
+
+### VIII. Proibição de Gambiarras
+Proibido usar gambiarras ("workarounds") em produção ou em testes. Testes NÃO PODEM conter artifícios que distorçam resultados, ignorar falhas ou suprimir erros. Qualquer atalho deverá ser removido antes da conclusão da tarefa.
+
+## Regras de Qualidade e Entrega
+- Linting automatizado DEVE estar configurado e ser executado como parte do fluxo de validação (CI/local).
+- Testes automatizados DEVERÃO ser executáveis localmente e no CI; os resultados DEVEM ser determinísticos.
+- Métricas de cobertura DEVERÃO apontar 100% para o escopo da funcionalidade entregue (linhas e ramos pertinentes).
+- Mudanças na arquitetura que afetem princípios DEVEM incluir justificativa no plano da feature e aprovação em revisão de código.
 
 ## Project Constraints
-The project MUST use Java 21.
-The project MUST use a Spring Boot version compatible with Java 21.
-The application MUST remain small and simple; avoid multi-module architecture, heavy domain layers, and unnecessary abstractions.
-The project MUST prefer direct, understandable implementations over generic frameworks or elaborate patterns.
-The project MUST keep documentation and configuration concise.
+- O projeto DEVE usar Java 21.
+- O projeto DEVE usar uma versão do Spring Boot compatível com Java 21.
+- A arquitetura DEVE seguir o padrão hexagonal (ports/adapters).
+- Preferir implementações diretas e legíveis; evitar frameworks desnecessários.
 
 ## Development Workflow
-Changes MUST preserve readability and keep the implementation understandable to a new contributor. Before introducing new dependencies or architectural patterns, the team MUST verify that the simpler solution is insufficient. Any change that increases complexity MUST include a clear justification and be limited to the smallest necessary scope.
+- Antes de iniciar implementação, o plano DEVE descrever como a feature respeita a arquitetura hexagonal e como alcançará 100% de cobertura de testes.
+- Para cada user story, criar tarefas separadas para: implementação, testes (unitários, integração, contrato quando aplicável), e verificação de cobertura.
+- Nenhuma mesclagem ou marcação de tarefa como concluída até que lint e testes passem 100% localmente e no CI.
 
 ## Governance
-This constitution supersedes ad hoc practices for this repository. Any amendment MUST update this document, describe the rationale, and adjust dependent templates or guidance when the change affects planning, specification, or delivery expectations. Compliance reviews MUST confirm that implementation decisions remain consistent with these principles, especially simplicity, clean code, and the decision to avoid automated tests by default.
+Esta constituição substitui práticas ad‑hoc. Emendas DEVEM:
+- Ser registradas neste documento com data e justificativa;
+- Indicar quais templates ou guias foram atualizados;
+- Incluir um plano de migração quando a mudança afetar entregas existentes.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-05 | **Last Amended**: 2026-07-05
+**Version**: 1.1.0 | **Ratified**: 2026-07-05 | **Last Amended**: 2026-07-15
